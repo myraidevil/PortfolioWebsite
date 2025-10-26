@@ -107,29 +107,29 @@ const tokensMobileSmall = {
 };
 
 // Tokens that change based on theme
-const dark = {
-  background: 'oklch(17.76% 0 0)',
-  backgroundLight: 'oklch(21.78% 0 0)',
-  primary: 'oklch(84.42% 0.19 202.24)',
-  accent: 'oklch(84.42% 0.19 202.24)',
-  error: 'oklch(65.91% 0.249 13.76)',
-  text: 'var(--white)',
-  textTitle: 'var(--text)',
-  textBody: 'color-mix(in lab, var(--text) 80%, transparent)',
-  textLight: 'color-mix(in lab, var(--text) 60%, transparent)',
-};
+const dark = { background: 'oklch(17.76% 0 0)',
+   backgroundLight: 'oklch(21.78% 0 0)',
+    primary: 'oklch(84.42% 0.19 202.24)',
+     accent: 'oklch(84.42% 0.19 202.24)', 
+     error: 'oklch(65.91% 0.249 13.76)', 
+     text: 'var(--white)', 
+     textTitle: 'var(--text)', 
+     textBody: 'color-mix(in lab, var(--text) 80%, transparent)', 
+     textLight: 'color-mix(in lab, var(--text) 60%, transparent)', 
+    };
 
 const light = {
-  background: 'oklch(96.12% 0 0)',
+  background: 'oklch(97% 0.02 290)', // soft lavender-white
   backgroundLight: 'var(--white)',
-  primary: 'var(--black)',
-  accent: 'oklch(84.42% 0.19 202.24)',
-  error: 'oklch(63.17% 0.259 25.41)',
+  primary: 'oklch(45% 0.18 290)', // darker violet for readability
+  accent: 'oklch(60% 0.22 290)', // mid-range violet accent
+  error: 'oklch(63% 0.25 25)',
   text: 'var(--black)',
   textTitle: 'color-mix(in lab, var(--text) 90%, transparent)',
   textBody: 'color-mix(in lab, var(--text) 75%, transparent)',
   textLight: 'color-mix(in lab, var(--text) 55%, transparent)',
 };
+
 
 export const tokens = {
   base: baseTokens,

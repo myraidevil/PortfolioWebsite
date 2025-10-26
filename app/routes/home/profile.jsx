@@ -17,20 +17,19 @@ const ProfileText = ({ visible, titleId }) => (
     <Heading className={styles.title} data-visible={visible} level={3} id={titleId}>
       <DecoderText text="Hi there" start={visible} delay={500} />
     </Heading>
-<Text className={styles.description} data-visible={visible} size="l" as="p">
-  I’m Huzaif Ahmed, a full-stack web developer. I build modern, animated, and
-  interactive web projects that combine clean code with engaging user experiences.
-  Being comfortable with multiple technologies allows me to rapidly prototype and
-  deliver creative solutions.
-</Text>
+    <Text className={styles.description} data-visible={visible} size="l" as="p">
+      I’m Rohit M, a product designer and UI/UX specialist with experience in full-stack
+      (MERN) development. I create modern, interactive, and visually engaging web
+      experiences, focusing on intuitive design and seamless user interactions. While I’m
+      comfortable with development, my primary passion lies in crafting design-driven
+      solutions that are both creative and user-centered.
+    </Text>
 
-<Text className={styles.description} data-visible={visible} size="l" as="p">
-  In my spare time, I enjoy exploring new frameworks, contributing to open-source projects,
-  and creating side projects. I’m always excited to hear about new ideas, so feel free to
-  get in touch!
-</Text>
-
-
+    <Text className={styles.description} data-visible={visible} size="l" as="p">
+      When I’m not designing, I work on side projects that combine my UI/UX expertise with
+      learning development. I’m passionate about connecting with others to create
+      meaningful, design-first experiences
+    </Text>
   </Fragment>
 );
 

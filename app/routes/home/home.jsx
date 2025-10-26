@@ -1,11 +1,11 @@
 import gamestackTexture2Placeholder from '~/assets/gamestack-list-placeholder.jpg';
 import gamestackTexturePlaceholder from '~/assets/gamestack-login-placeholder.jpg';
-import SpringFallFirstTexture from '~/assets/SpringFallFirstTexture.png';
+import blockverseFirstTexture from '~/assets/blockVerseFirstTexture.png';
 import SpringFallSecondTexture from '~/assets/SpringFallSecondTexture.png';
 import sliceTexturePlaceholder from '~/assets/slice-app-placeholder.jpg';
 import CoolestProjectsTexure from '~/assets/CoolestProjectsTexure.png';
 import sprTexturePlaceholder from '~/assets/spr-lesson-builder-dark-placeholder.jpg';
-import devxoraTexture from '~/assets/devxoraTexture.png';
+import dashboard from '~/assets/dashboard.png';
 import { Footer } from '~/components/footer';
 import { baseMeta } from '~/utils/meta';
 import { Intro } from './intro';
@@ -14,6 +14,7 @@ import { ProjectSummary } from './project-summary';
 import { useEffect, useRef, useState } from 'react';
 import config from '~/config.json';
 import styles from './home.module.css';
+import { Skills } from './skills';
 
 // Prefetch draco decoader wasm
 export const links = () => {
@@ -49,10 +50,20 @@ export const Home = () => {
   const projectOne = useRef();
   const projectTwo = useRef();
   const projectThree = useRef();
+  const projectFour = useRef();
   const details = useRef();
+  const skillsRef = useRef();
 
   useEffect(() => {
-    const sections = [intro, projectOne, projectTwo, projectThree, details];
+    const sections = [
+      intro,
+      skillsRef,
+      projectOne,
+      projectTwo,
+      projectThree,
+      projectFour,
+      details,
+    ];
 
     const sectionObserver = new IntersectionObserver(
       (entries, observer) => {
@@ -94,21 +105,25 @@ export const Home = () => {
         sectionRef={intro}
         scrollIndicatorHidden={scrollIndicatorHidden}
       />
+      <Skills
+        sectionRef={skillsRef}
+        visible={visibleSections.includes(skillsRef.current)}
+      />
       <ProjectSummary
         id="project-1"
         sectionRef={projectOne}
         visible={visibleSections.includes(projectOne.current)}
         index={1}
-        title="Turning Clicks into Clients. Dreams into Brands. "
-        description="Automate. Scale. Dominate — with Devxora."
-        buttonText="Visit Project"
-        buttonLink="https://devxora.in"
+        title="Turning Chaos into Clarity. Tasks into Triumphs. "
+        description="Automate. Prioritize. Achieve — with Zidio Task Management."
+        buttonText="View Project"
+        buttonLink="https://www.behance.net/gallery/231215799/Zidio-task-Mangement-Web-App"
         model={{
           type: 'laptop',
           alt: 'Smart Sparrow lesson builder',
           textures: [
             {
-              srcSet: `${devxoraTexture} 1280w, ${devxoraTexture} 2560w`,
+              srcSet: `${dashboard} 1280w, ${dashboard} 2560w`,
               placeholder: sprTexturePlaceholder,
             },
           ],
@@ -128,15 +143,14 @@ export const Home = () => {
           type: 'phone',
           alt: 'App login screen',
           textures: [
-             {
+            {
               srcSet: `${SpringFallSecondTexture} 375w, ${SpringFallSecondTexture} 750w`,
               placeholder: gamestackTexture2Placeholder,
             },
             {
-              srcSet: `${SpringFallFirstTexture} 375w, ${SpringFallFirstTexture} 750w`,
+              srcSet: `${blockverseFirstTexture} 375w, ${blockverseFirstTexture} 750w`,
               placeholder: gamestackTexturePlaceholder,
             },
-           
           ],
         }}
       />
@@ -144,6 +158,26 @@ export const Home = () => {
         id="project-3"
         sectionRef={projectThree}
         visible={visibleSections.includes(projectThree.current)}
+        index={3}
+        title="Featured Coolest Projects. "
+        description="A look at my most creative and high-impact work."
+        buttonText="Visit"
+        buttonLink="https://instagram.com/myraidevil"
+        model={{
+          type: 'laptop',
+          alt: 'Annotating a biomedical image in the Slice app',
+          textures: [
+            {
+              srcSet: `${CoolestProjectsTexure} 800w, ${CoolestProjectsTexure} 1920w`,
+              placeholder: sliceTexturePlaceholder,
+            },
+          ],
+        }}
+      />
+      <ProjectSummary
+        id="project-4"
+        sectionRef={projectFour}
+        visible={visibleSections.includes(projectFour.current)}
         index={3}
         title="Featured Coolest Projects. "
         description="A look at my most creative and high-impact work."

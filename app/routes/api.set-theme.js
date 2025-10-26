@@ -1,4 +1,5 @@
 import { json, createCookieSessionStorage } from '@remix-run/cloudflare';
+const isProd = process.env.NODE_ENV === 'production';
 
 export async function action({ request, context }) {
   const formData = await request.formData();
@@ -12,7 +13,7 @@ export async function action({ request, context }) {
       path: '/',
       sameSite: 'lax',
       secrets: [context.cloudflare.env.SESSION_SECRET || ' '],
-      secure: true,
+      secure: isProd,  //change to true later
     },
   });
 

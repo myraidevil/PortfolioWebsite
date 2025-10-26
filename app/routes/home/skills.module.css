@@ -1,0 +1,131 @@
+.skills {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space3XL) var(--spaceL);
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 600ms var(--bezierFastoutSlowin);
+  background-color: var(--background);
+}
+
+.skills[data-visible='true'] {
+  opacity: 1;
+}
+
+.skills::before,
+.skills::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 50px;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.skills::before {
+  left: 0;
+  background: linear-gradient(to right, var(--background), transparent);
+}
+
+.skills::after {
+  right: 0;
+  background: linear-gradient(to left, var(--background), transparent);
+}
+
+.title {
+  font-size: var(--fontSizeH3);
+  font-weight: var(--fontWeightBold);
+  margin-bottom: var(--space2XL);
+  color: var(--textTitle);
+}
+
+.skillsCarousel {
+  position: relative;
+  z-index: 1;
+  width: 60vw;
+  max-width: 60%;
+  margin: 0 auto;
+  overflow: hidden;
+  padding-left: var(--spaceL);
+  padding-right: var(--spaceL);
+  /* Keep fixed and centered */
+}
+
+.scrollingWrapper {
+  display: flex;
+  gap: var(--spaceXL);
+  will-change: transform;
+  /* The actual scroll animation is handled by JS */
+}
+
+.skillItem {
+  flex-shrink: 0;
+  background: color-mix(in srgb, var(--surface) 96%, transparent);
+  border-radius: var(--radiusL);
+  padding: var(--spaceL);
+  min-width: 200px;
+  max-width: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.skillItem:hover {
+  transform: translateY(-6px) scale(1.05);
+  background: color-mix(in srgb, var(--surface) 90%, var(--primary) 6%);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.skillIcon {
+  font-size: 48px;
+  margin-bottom: var(--spaceS);
+  color: var(--textTitle);
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.skillItem:hover .skillIcon {
+  color: var(--primary);
+  transform: scale(1.1);
+}
+
+.skillName {
+  font-size: var(--fontSizeBodyS);
+  font-weight: var(--fontWeightMedium);
+  color: var(--textBody);
+  letter-spacing: 0.02em;
+  opacity: 0.8;
+  transition: color 0.25s ease;
+}
+
+.skillItem:hover .skillName {
+  color: var(--primary);
+  opacity: 1;
+}
+
+.viewAll {
+  margin-top: var(--space2XL);
+}
+
+@media (max-width: 768px) {
+  .skillsCarousel {
+    width: 100vw;
+    max-width: 100%;
+  }
+
+  .skillItem {
+    min-width: 180px;
+    padding: var(--spaceM);
+  }
+
+  .skillIcon {
+    font-size: 36px;
+  }
+}

@@ -13,7 +13,7 @@ _______________________________________________________________________________
 
 DEVELOPED BY 
 
-Huzaif Ahmed
+Rohit M
 
 Hand crafted design & web development
 
@@ -22,7 +22,7 @@ Figma
 Photoshop
 Blender
 
-github.com/huzaifhamedz
+github.com/myraidevil
 
 _______________________________________________________________________________
 
