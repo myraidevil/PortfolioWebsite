@@ -7,6 +7,11 @@ import {
   SiMongodb,
   SiFigma,
   SiAdobephotoshop,
+  SiHtml5,
+  SiCss3,
+  SiJavascript,
+  SiExpress,
+  SiGithub,
 } from 'react-icons/si';
 
 const SKILLS = [
@@ -14,7 +19,12 @@ const SKILLS = [
   { name: 'Node.js', icon: <SiNodedotjs /> },
   { name: 'MongoDB', icon: <SiMongodb /> },
   { name: 'Figma', icon: <SiFigma /> },
+  { name: 'CSS3', icon: <SiCss3 /> },
   { name: 'Photoshop', icon: <SiAdobephotoshop /> },
+  { name: 'JavaScript (ES6+)', icon: <SiJavascript /> },
+  { name: 'Express.js', icon: <SiExpress /> },
+  { name: 'HTML5', icon: <SiHtml5 /> },
+  { name: 'Github', icon: <SiGithub /> },
 ];
 
 export const Skills = ({ sectionRef, visible }) => {

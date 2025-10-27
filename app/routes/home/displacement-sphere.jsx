@@ -48,6 +48,7 @@ export const DisplacementSphere = props => {
   const rotationX = useSpring(0, springConfig);
   const rotationY = useSpring(0, springConfig);
 
+  // === INITIALIZE THREE.JS SCENE ===
   useEffect(() => {
     const { innerWidth, innerHeight } = window;
     mouse.current = new Vector2(0.8, 0.5);
@@ -67,11 +68,15 @@ export const DisplacementSphere = props => {
 
     scene.current = new Scene();
 
+    // === Material with theme uniform ===
     material.current = new MeshPhongMaterial();
     material.current.onBeforeCompile = shader => {
       uniforms.current = UniformsUtils.merge([
         shader.uniforms,
-        { time: { type: 'f', value: 0 } },
+        {
+          time: { type: 'f', value: 0 },
+          themeFactor: { type: 'f', value: theme === 'light' ? 1.0 : 0.0 },
+        },
       ]);
 
       shader.uniforms = uniforms.current;
@@ -93,6 +98,7 @@ export const DisplacementSphere = props => {
     };
   }, []);
 
+  // === LIGHTS ===
   useEffect(() => {
     const dirLight = new DirectionalLight(0xffffff, theme === 'light' ? 1.8 : 2.0);
     const ambientLight = new AmbientLight(0xffffff, theme === 'light' ? 2.7 : 0.4);
@@ -109,15 +115,22 @@ export const DisplacementSphere = props => {
     };
   }, [theme]);
 
+  // === UPDATE THEME UNIFORM ===
+  useEffect(() => {
+    if (uniforms.current?.themeFactor) {
+      uniforms.current.themeFactor.value = theme === 'light' ? 1.0 : 0.0;
+    }
+  }, [theme]);
+
+  // === HANDLE WINDOW RESIZE ===
   useEffect(() => {
     const { width, height } = windowSize;
-
     const adjustedHeight = height + height * 0.3;
     renderer.current.setSize(width, adjustedHeight);
     camera.current.aspect = width / adjustedHeight;
     camera.current.updateProjectionMatrix();
 
-    // Render a single frame on resize when not animating
+    // Render single frame when not animating
     if (reduceMotion) {
       renderer.current.render(scene.current, camera.current);
     }
@@ -134,6 +147,7 @@ export const DisplacementSphere = props => {
     }
   }, [reduceMotion, windowSize]);
 
+  // === HANDLE MOUSE MOVEMENT ===
   useEffect(() => {
     const onMouseMove = throttle(event => {
       const position = {
@@ -154,6 +168,7 @@ export const DisplacementSphere = props => {
     };
   }, [isInViewport, reduceMotion, rotationX, rotationY]);
 
+  // === ANIMATION LOOP ===
   useEffect(() => {
     let animation;
 

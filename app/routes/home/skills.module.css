@@ -9,7 +9,7 @@
   overflow: hidden;
   opacity: 0;
   transition: opacity 600ms var(--bezierFastoutSlowin);
-  background-color: var(--background);
+  
 }
 
 .skills[data-visible='true'] {
