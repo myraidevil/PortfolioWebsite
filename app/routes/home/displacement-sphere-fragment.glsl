@@ -48,7 +48,7 @@ void main() {
   
   // Color logic — violet for light mode, blue-violet for dark mode
   vec3 darkTone = vec3(base.b * 1.4, base.r * 0.4, base.r * 1.2);   // neon blue-violet
-  vec3 lightTone = vec3(base.r * 1.1, base.b * 0.8, base.r * 1.2);  // softer violet
+  vec3 lightTone = vec3(base.r * 1.2, base.b * 0.9, base.r * 1.2);  // softer violet
   vec3 tone = mix(darkTone, lightTone, themeFactor);
 
   vec4 diffuseColor = vec4(cos(tone * noise * 3.0), 1.0);

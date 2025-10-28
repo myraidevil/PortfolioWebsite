@@ -16,7 +16,7 @@ import config from '~/config.json';
 import styles from './home.module.css';
 import { Skills } from './skills';
 
-// Prefetch draco decoader wasm
+// Prefetch draco decoder wasm
 export const links = () => {
   return [
     {
@@ -46,6 +46,7 @@ export const meta = () => {
 export const Home = () => {
   const [visibleSections, setVisibleSections] = useState([]);
   const [scrollIndicatorHidden, setScrollIndicatorHidden] = useState(false);
+
   const intro = useRef();
   const projectOne = useRef();
   const projectTwo = useRef();
@@ -72,7 +73,7 @@ export const Home = () => {
             const section = entry.target;
             observer.unobserve(section);
             if (visibleSections.includes(section)) return;
-            setVisibleSections(prevSections => [...prevSections, section]);
+            setVisibleSections(prev => [...prev, section]);
           }
         });
       },
@@ -80,16 +81,11 @@ export const Home = () => {
     );
 
     const indicatorObserver = new IntersectionObserver(
-      ([entry]) => {
-        setScrollIndicatorHidden(!entry.isIntersecting);
-      },
+      ([entry]) => setScrollIndicatorHidden(!entry.isIntersecting),
       { rootMargin: '-100% 0px 0px 0px' }
     );
 
-    sections.forEach(section => {
-      sectionObserver.observe(section.current);
-    });
-
+    sections.forEach(section => sectionObserver.observe(section.current));
     indicatorObserver.observe(intro.current);
 
     return () => {
@@ -100,35 +96,37 @@ export const Home = () => {
 
   return (
     <div className={styles.home}>
+      {/* Intro Section */}
       <Intro
         id="intro"
         sectionRef={intro}
         scrollIndicatorHidden={scrollIndicatorHidden}
       />
+
+      {/* Skills Section */}
       <Skills
         sectionRef={skillsRef}
         visible={visibleSections.includes(skillsRef.current)}
       />
+
+      {/* Works Section */}
+
+      {/* Project 1 */}
       <ProjectSummary
         id="project-1"
         sectionRef={projectOne}
         visible={visibleSections.includes(projectOne.current)}
         index={1}
-        title="Turning Chaos into Clarity. Tasks into Triumphs. "
+        title="Turning Chaos into Clarity. Tasks into Triumphs."
         description="Automate. Prioritize. Achieve — with Zidio Task Management."
         buttonText="View Project"
         buttonLink="https://www.behance.net/gallery/231215799/Zidio-task-Mangement-Web-App"
-        model={{
-          type: 'laptop',
-          alt: 'Smart Sparrow lesson builder',
-          textures: [
-            {
-              srcSet: `${dashboard} 1280w, ${dashboard} 2560w`,
-              placeholder: sprTexturePlaceholder,
-            },
-          ],
-        }}
+        secondaryButtonText="Details"
+        secondaryButtonLink="#"
+        imageSrc={dashboard}
       />
+
+      {/* Project 2 */}
       <ProjectSummary
         id="project-2"
         alternate
@@ -139,61 +137,42 @@ export const Home = () => {
         description="Empowering international students to achieve their U.S. study dreams — the right way."
         buttonText="Visit Project"
         buttonLink="https://spring-fall.vercel.app/"
-        model={{
-          type: 'phone',
-          alt: 'App login screen',
-          textures: [
-            {
-              srcSet: `${SpringFallSecondTexture} 375w, ${SpringFallSecondTexture} 750w`,
-              placeholder: gamestackTexture2Placeholder,
-            },
-            {
-              srcSet: `${blockverseFirstTexture} 375w, ${blockverseFirstTexture} 750w`,
-              placeholder: gamestackTexturePlaceholder,
-            },
-          ],
-        }}
+        secondaryButtonText="Details"
+        secondaryButtonLink="#"
+        imageSrc={SpringFallSecondTexture}
       />
+
+      {/* Project 3 */}
       <ProjectSummary
         id="project-3"
         sectionRef={projectThree}
         visible={visibleSections.includes(projectThree.current)}
         index={3}
-        title="Featured Coolest Projects. "
+        title="Featured Coolest Projects."
         description="A look at my most creative and high-impact work."
         buttonText="Visit"
         buttonLink="https://instagram.com/myraidevil"
-        model={{
-          type: 'laptop',
-          alt: 'Annotating a biomedical image in the Slice app',
-          textures: [
-            {
-              srcSet: `${CoolestProjectsTexure} 800w, ${CoolestProjectsTexure} 1920w`,
-              placeholder: sliceTexturePlaceholder,
-            },
-          ],
-        }}
+        secondaryButtonText="Details"
+        secondaryButtonLink="#"
+        imageSrc={CoolestProjectsTexure}
       />
+
+      {/* Project 4 */}
       <ProjectSummary
         id="project-4"
         sectionRef={projectFour}
         visible={visibleSections.includes(projectFour.current)}
-        index={3}
-        title="Featured Coolest Projects. "
+        index={4}
+        title="Featured Coolest Projects."
         description="A look at my most creative and high-impact work."
         buttonText="Visit"
         buttonLink="https://instagram.com/dev_xora"
-        model={{
-          type: 'laptop',
-          alt: 'Annotating a biomedical image in the Slice app',
-          textures: [
-            {
-              srcSet: `${CoolestProjectsTexure} 800w, ${CoolestProjectsTexure} 1920w`,
-              placeholder: sliceTexturePlaceholder,
-            },
-          ],
-        }}
+        secondaryButtonText="Details"
+        secondaryButtonLink="#"
+        imageSrc={blockverseFirstTexture}
       />
+
+      {/* Profile & Footer */}
       <Profile
         sectionRef={details}
         visible={visibleSections.includes(details.current)}

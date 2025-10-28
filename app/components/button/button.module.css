@@ -183,3 +183,44 @@
     }
   }
 }
+
+.button[data-variant='secondary'] {
+  --buttonTextColor: var(--primary);
+  --buttonBg: color-mix(in lab, var(--primary) 25%, transparent);
+  --buttonHoverBg: color-mix(in lab, var(--primary) 40%, transparent);
+
+  background: transparent;
+  color: var(--buttonTextColor);
+  position: relative;
+  isolation: isolate;
+  transition: all 0.3s var(--bezierFastoutSlowin);
+  padding-inline: var(--spaceL);
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--buttonBg);
+    clip-path: polygon(
+      0 0,
+      100% 0,
+      100% calc(100% - 8px),
+      calc(100% - 8px) 100%,
+      0 100%
+    );
+    transition: background var(--durationM) var(--bezierFastoutSlowin);
+  }
+
+  &:hover::after {
+    background: var(--buttonHoverBg);
+  }
+
+  &:hover {
+    transform: scale(1.04);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
