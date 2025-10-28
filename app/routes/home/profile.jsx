@@ -11,6 +11,7 @@ import { Fragment, useState } from 'react';
 import { media } from '~/utils/style';
 import katakana from './katakana.svg';
 import styles from './profile.module.css';
+import { FaLinkedin, FaGithub, FaInstagram, FaTwitter } from 'react-icons/fa';
 
 const ProfileText = ({ visible, titleId }) => (
   <Fragment>
@@ -18,11 +19,9 @@ const ProfileText = ({ visible, titleId }) => (
       <DecoderText text="Hi there" start={visible} delay={500} />
     </Heading>
     <Text className={styles.description} data-visible={visible} size="l" as="p">
-      I’m Rohit M, a product designer and UI/UX specialist with experience in full-stack
-      (MERN) development. I create modern, interactive, and visually engaging web
-      experiences, focusing on intuitive design and seamless user interactions. While I’m
-      comfortable with development, my primary passion lies in crafting design-driven
-      solutions that are both creative and user-centered.
+      I’m Rohit M, a product designer and UI/UX specialist with MERN stack experience. I
+      design modern, interactive, and user-centered web experiences that blend creativity
+      with seamless functionality.
     </Text>
 
     <Text className={styles.description} data-visible={visible} size="l" as="p">
@@ -62,6 +61,41 @@ export const Profile = ({ id, visible, sectionRef }) => {
               >
                 Send me a message
               </Button>
+              {/* Social Media Links */}
+              <div className={styles.socialLinks}>
+                <a
+                  href="https://www.linkedin.com/in/yourprofile"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn"
+                >
+                  <FaLinkedin />
+                </a>
+                <a
+                  href="https://github.com/yourprofile"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="GitHub"
+                >
+                  <FaGithub />
+                </a>
+                <a
+                  href="https://www.instagram.com/yourprofile"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Instagram"
+                >
+                  <FaInstagram />
+                </a>
+                <a
+                  href="https://twitter.com/yourprofile"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Twitter"
+                >
+                  <FaTwitter />
+                </a>
+              </div>
             </div>
             <div className={styles.column}>
               <div className={styles.tag} aria-hidden>

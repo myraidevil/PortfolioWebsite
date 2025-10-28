@@ -312,3 +312,45 @@
     animation: fade-in var(--durationL) ease var(--durationXL) forwards;
   }
 }
+
+.socialLinks {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spaceL);
+  margin-top: var(--space2XL);
+  margin-bottom: var(--spaceL);
+  transition: all 0.3s ease;
+}
+
+.socialLinks a {
+  color: var(--textMuted);
+  font-size: 1.8rem;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.socialLinks a:hover {
+  color: var(--textLight);
+  transform: translateY(-3px) scale(1.1);
+}
+
+@media (max-width: 768px) {
+  .socialLinks {
+    gap: var(--spaceM);
+    margin-top: var(--spaceXL);
+    margin-bottom: var(--spaceM);
+  }
+
+  .socialLinks a {
+    font-size: 1.6rem;
+  }
+}
+
+/* Optional: smooth dark/light adaptation */
+[data-theme='dark'] .socialLinks a {
+  color: var(--textMuted);
+}
+
+[data-theme='light'] .socialLinks a {
+  color: var(--textLight);
+}

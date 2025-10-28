@@ -1,0 +1,138 @@
+/* Root container */
+.myProjectsSection {
+  width: 100%;
+  max-width: 2400px;
+  margin: 0 auto var(--space5XL, 96px);
+  padding-inline: var(--spaceXL);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spaceL); /* reduced from XL for tighter layout */
+}
+
+/* Section title */
+.myProjectsSection h2 {
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 700;
+  color: var(--textHeading);
+  letter-spacing: -0.02em;
+  position: relative;
+  margin-bottom: var(--spaceXS); /* add a small margin only */
+}
+
+/* Section paragraph */
+.myProjectsSection p {
+  color: var(--textMuted);
+  font-size: 1.1rem;
+  margin-top: 0;
+  margin-bottom: var(--spaceM); /* reduced bottom margin */
+  max-width: 480px;
+  line-height: 1.6;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spaceL); /* increased spacing between tabs */
+  position: relative;
+  padding-bottom: 6px;
+  border-bottom: 1px solid color-mix(in lab, var(--textMuted) 30%, transparent);
+}
+
+/* Individual tab buttons */
+.tabButton {
+  position: relative;
+  padding: var(--spaceM) var(--spaceL); /* increased padding for size */
+  background: none;
+  border: none;
+  color: var(--textMuted);
+  font-size: 1.15rem; /* slightly larger text */
+  font-weight: 600; /* bolder for better emphasis */
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.tabButton::after {
+  content: "";
+  position: absolute;
+  bottom: -5px; /* adjusted for bigger height */
+  left: 50%;
+  width: 0%;
+  height: 3px;
+  background: var(--primary);
+  border-radius: 2px;
+  transform: translateX(-50%);
+  transition: width 0.3s ease;
+}
+
+.tabButton:hover {
+  color: var(--primary);
+}
+
+.tabButton:hover::after {
+  width: 60%;
+}
+
+/* Active state — clean underline */
+.tabButton.active {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.tabButton.active::after {
+  width: 90%;
+}
+
+/* Projects grid */
+.projectsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space3XL);
+  width: 100%;
+  justify-items: center;
+}
+
+/* Subtle fade-in animation for project cards */
+.projectsGrid > * {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.6s ease forwards;
+}
+
+.projectsGrid > *:nth-child(odd) {
+  animation-delay: 0.1s;
+}
+.projectsGrid > *:nth-child(even) {
+  animation-delay: 0.2s;
+}
+
+/* Fade-up keyframes */
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .myProjectsSection {
+    padding-inline: var(--spaceM);
+  }
+
+  .tabs {
+    gap: var(--spaceS);
+  }
+
+  .tabButton {
+    font-size: 1rem;
+    padding: var(--spaceS) var(--spaceM);
+  }
+
+  .projectsGrid {
+    gap: var(--space2XL);
+  }
+}

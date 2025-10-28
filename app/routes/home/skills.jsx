@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import styles from './skills.module.css';
 import { Button } from '~/components/button';
 import {
@@ -29,9 +29,20 @@ const SKILLS = [
 
 export const Skills = ({ sectionRef, visible }) => {
   const carouselRef = useRef();
+  const [glowIndex, setGlowIndex] = useState(0);
+
+  const skillsDuplicated = [...SKILLS, ...SKILLS]; // duplicate for smooth scroll
 
   useEffect(() => {
-    const speed = 3; // faster speed in pixels per frame
+    // ✅ Adjust scroll speed dynamically based on screen size
+    const getSpeed = () => (window.innerWidth <= 768 ? 1.5 : 3); // slower on mobile
+    let speed = getSpeed();
+
+    const handleResize = () => {
+      speed = getSpeed(); // update on resize
+    };
+    window.addEventListener('resize', handleResize);
+
     let animationFrameId;
 
     const scroll = () => {
@@ -47,10 +58,11 @@ export const Skills = ({ sectionRef, visible }) => {
 
     scroll();
 
-    return () => cancelAnimationFrame(animationFrameId);
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
-
-  const skillsDuplicated = [...SKILLS, ...SKILLS]; // duplicate for seamless scroll
 
   return (
     <section ref={sectionRef} className={styles.skills} data-visible={visible}>
@@ -58,16 +70,20 @@ export const Skills = ({ sectionRef, visible }) => {
 
       <div className={styles.skillsCarousel} ref={carouselRef}>
         <div className={styles.scrollingWrapper}>
-          {skillsDuplicated.map((skill, idx) => (
-            <div
-              key={`${skill.name}-${idx}`}
-              className={styles.skillItem}
-              style={{ transitionDelay: `${(idx % SKILLS.length) * 150}ms` }}
-            >
-              <div className={styles.skillIcon}>{skill.icon}</div>
-              <p className={styles.skillName}>{skill.name}</p>
-            </div>
-          ))}
+          {skillsDuplicated.map((skill, idx) => {
+            const baseIndex = idx % SKILLS.length;
+            const isGlowing = baseIndex === glowIndex;
+
+            return (
+              <div
+                key={`${skill.name}-${idx}`}
+                className={`${styles.skillItem} ${isGlowing ? styles.glowing : ''}`}
+              >
+                <div className={styles.skillIcon}>{skill.icon}</div>
+                <p className={styles.skillName}>{skill.name}</p>
+              </div>
+            );
+          })}
         </div>
       </div>
 

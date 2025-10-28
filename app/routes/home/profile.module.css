@@ -141,3 +141,103 @@
     opacity: 1;
   }
 }
+
+
+
+.socialLinks {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spaceL);
+  margin-top: var(--space2XL);
+  margin-bottom: var(--spaceL);
+  transition: all 0.3s ease;
+}
+
+.socialLinks a {
+  color: var(--textMuted);
+  font-size: 1.8rem;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.socialLinks a:hover {
+  background: color-mix(in srgb, var(--surface) 90%, var(--primary) 6%);
+  color: var(--primary);
+  transform: translateY(-3px) scale(1.1);
+}
+
+@media (max-width: 768px) {
+  .socialLinks {
+    gap: var(--spaceM);
+    margin-top: var(--spaceXL);
+    margin-bottom: var(--spaceM);
+  }
+
+  .socialLinks a {
+    font-size: 1.6rem;
+  }
+}
+
+/* Optional: smooth dark/light adaptation */
+[data-theme='dark'] .socialLinks a {
+  color: var(--textMuted);
+}
+
+[data-theme='light'] .socialLinks a {
+  color: var(--textLight);
+}
+
+.skillItem {
+  flex-shrink: 0;
+  background: color-mix(in srgb, var(--surface) 96%, transparent);
+  border-radius: var(--radiusL);
+  padding: var(--spaceL);
+  min-width: 200px;
+  max-width: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.skillItem:hover {
+  transform: translateY(-6px) scale(1.05);
+  background: color-mix(in srgb, var(--surface) 90%, var(--primary) 6%);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.skillIcon {
+  font-size: 48px;
+  margin-bottom: var(--spaceS);
+  color: var(--textTitle);
+  transition: color 0.25s ease, transform 0.25s ease;
+  animation: none;
+}
+
+/* Glow pulse animation for ACTIVE skill icon only */
+.skillItem.active .skillIcon {
+  animation: glowPulse 6s ease-in-out infinite;
+  color: var(--primary);
+  transform-origin: center;
+}
+
+.skillItem:hover .skillIcon {
+  color: var(--primary);
+  transform: scale(1.1);
+}
+
+.skillName {
+  font-size: var(--fontSizeBodyS);
+  font-weight: var(--fontWeightMedium);
+  color: var(--textBody);
+  letter-spacing: 0.02em;
+  opacity: 0.8;
+  transition: color 0.25s ease;
+}
+
+.skillItem:hover .skillName {
+  color: var(--primary);
+  opacity: 1;
+}

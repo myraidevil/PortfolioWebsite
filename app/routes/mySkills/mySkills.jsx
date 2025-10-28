@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
+import { Link } from '@remix-run/react'; // ✅ Remix navigation
+import { IoClose } from 'react-icons/io5'; // ✅ Close icon
 import styles from './mySkills.module.css';
 import {
   SiHtml5,
@@ -131,6 +133,13 @@ export const MySkills = () => {
 
   return (
     <div className={styles.container}>
+      <p className="hover-hint">Hover or tap a skill to learn more</p>
+
+      {/* ✅ Close Button (fixed top-right) */}
+      <Link to="/" className={styles.closeButton} aria-label="Close and go home">
+        <IoClose size={28} />
+      </Link>
+
       <section ref={sectionRef} className={styles.skills} data-visible={visible}>
         <h1 className={styles.title}>My Skills</h1>
 
@@ -157,7 +166,7 @@ export const MySkills = () => {
           </div>
         ))}
 
-        {/* Floating description box - only shows when hovering */}
+        {/* Floating description box */}
         {hoveredSkill && (
           <div className={styles.floatingDescription}>
             <h3>{hoveredSkill.name}</h3>

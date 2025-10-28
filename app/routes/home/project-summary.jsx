@@ -11,6 +11,7 @@ import { useWindowSize } from '~/hooks';
 import { cssProps, media } from '~/utils/style';
 import { FiEye } from 'react-icons/fi';
 import katakana from './katakana.svg';
+import clsx from 'clsx';
 import styles from './project-summary.module.css';
 
 export function ProjectSummary({
@@ -36,6 +37,11 @@ export function ProjectSummary({
 
   // Alternate layout only for desktop
   const alternate = index % 2 === 0 && !isMobile;
+
+  // Compose katakana wrapper class with conditional mirroring
+  const katakanaClass = clsx(styles.katakanaWrapper, {
+    [styles.alternateKatakana]: alternate,
+  });
 
   // Katakana SVG
   function renderKatakana(visible) {
@@ -90,7 +96,7 @@ export function ProjectSummary({
           />
 
           <motion.div
-            className={styles.katakanaWrapper}
+            className={katakanaClass}
             initial={{ opacity: 0, scale: 0.9, y: 10 }}
             whileInView={{ opacity: 0.85, scale: 1, y: 0 }}
             transition={{
