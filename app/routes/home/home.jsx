@@ -1,24 +1,15 @@
-import gamestackTexture2Placeholder from '~/assets/gamestack-list-placeholder.jpg';
-import gamestackTexturePlaceholder from '~/assets/gamestack-login-placeholder.jpg';
-import blockverseFirstTexture from '~/assets/blockVerseFirstTexture.png';
-import SpringFallSecondTexture from '~/assets/SpringFallSecondTexture.png';
-import sliceTexturePlaceholder from '~/assets/slice-app-placeholder.jpg';
-import CoolestProjectsTexure from '~/assets/CoolestProjectsTexure.png';
-import sprTexturePlaceholder from '~/assets/spr-lesson-builder-dark-placeholder.jpg';
-import dashboard from '~/assets/dashboard.png';
+import { ProjectAssets } from '~/constants/project-assets';
 
 import { Footer } from '~/components/footer';
 import { baseMeta } from '~/utils/meta';
 import { Intro } from './intro';
 import { Profile } from './profile';
-import { ProjectSummary } from './project-summary';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, lazy, Suspense } from 'react';
 import config from '~/config.json';
 import styles from './home.module.css';
 import { Skills } from './skills';
 
-import MyProjectsSection from './myproject-section'; // Import the new section
-import { FaPlaceOfWorship } from 'react-icons/fa';
+const MyProjectsSection = lazy(() => import('./myproject-section'));
 
 export const links = () => [
   {
@@ -86,7 +77,6 @@ export const Home = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Your existing projects data with categories
   const allProjects = [
     {
       id: 'project-1',
@@ -98,11 +88,12 @@ export const Home = () => {
         'https://www.behance.net/gallery/231215799/Zidio-task-Mangement-Web-App',
       secondaryButtonText: 'Details',
       secondaryButtonLink: '#',
-      imageSrc: dashboard,
+      imageSrc: ProjectAssets.dashboard,
+      skills: ['React', 'Node.js', 'MongoDB', 'Express', 'UI/UX'],
     },
     {
       id: 'project-2',
-      category: 'Develpment',
+      category: 'Development',
       title: 'Turning Aspirations into Admissions.',
       description:
         'Empowering international students to achieve their U.S. study dreams — the right way.',
@@ -110,40 +101,44 @@ export const Home = () => {
       buttonLink: 'https://spring-fall.vercel.app/',
       secondaryButtonText: 'Details',
       secondaryButtonLink: '#',
-      imageSrc: SpringFallSecondTexture,
+      imageSrc: ProjectAssets.SpringFallSecondTexture,
+      skills: ['Next.js', 'Tailwind CSS', 'Motion UI'],
     },
     {
       id: 'project-3',
       category: 'Design',
       title: 'Featured Coolest Projects.',
       description: 'A look at my most creative and high-impact work.',
-      buttonText: 'view',
+      buttonText: 'View',
       buttonLink: 'https://instagram.com/myraidevil',
       secondaryButtonText: 'Details',
       secondaryButtonLink: '#',
-      imageSrc: CoolestProjectsTexure,
+      imageSrc: ProjectAssets.CoolestProjectsTexure,
+      skills: ['Figma', 'UI Design', 'Prototyping'],
     },
     {
       id: 'project-4',
       category: 'Development',
       title: 'BlockVerse Prototype.',
       description: 'Next-gen decentralized world experience design.',
-      buttonText: 'view',
+      buttonText: 'View',
       buttonLink: 'https://instagram.com/dev_xora',
       secondaryButtonText: 'Details',
       secondaryButtonLink: '#',
-      imageSrc: blockverseFirstTexture,
+      imageSrc: ProjectAssets.blockverseFirstTexture,
+      skills: ['React Three Fiber', 'Web3', 'Shader Design'],
     },
     {
       id: 'project-5',
       category: 'Design',
       title: 'BlockVerse zz.',
       description: 'Next-gen decentralized world experience design.',
-      buttonText: 'view',
+      buttonText: 'View',
       buttonLink: 'https://instagram.com/dev_xora',
       secondaryButtonText: 'Details',
       secondaryButtonLink: '#',
-      imageSrc: FaPlaceOfWorship,
+      imageSrc: ProjectAssets.CoolestProjectsTexure,
+      skills: ['Branding', 'Typography', 'Color Systems'],
     },
   ];
 
@@ -159,10 +154,7 @@ export const Home = () => {
         visible={visibleSections.includes(skillsRef.current)}
       />
 
-      {/* My Projects Section with Tabs */}
       <MyProjectsSection projects={allProjects} />
-
-      {/* Existing content here if needed */}
 
       <Profile
         sectionRef={details}

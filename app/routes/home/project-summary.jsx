@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '~/components/button';
 import { Divider } from '~/components/divider';
 import { Heading } from '~/components/heading';
 import { Section } from '~/components/section';
+import { OptimizedImage } from '~/components/optimized-image/optimized-image';
 import { Text } from '~/components/text';
 import { Transition } from '~/components/transition';
 import { useTheme } from '~/components/theme-provider';
@@ -26,8 +27,10 @@ export function ProjectSummary({
   secondaryButtonText,
   secondaryButtonLink,
   imageSrc,
+  skills = [],
 }) {
   const [focused, setFocused] = useState(false);
+  const [isClient, setIsClient] = useState(false);
   const { theme } = useTheme();
   const { width } = useWindowSize();
   const isMobile = width <= media.tablet;
@@ -35,15 +38,16 @@ export function ProjectSummary({
   const titleId = `${id}-title`;
   const indexText = index < 10 ? `0${index}` : index;
 
-  // Alternate layout only for desktop
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   const alternate = index % 2 === 0 && !isMobile;
 
-  // Compose katakana wrapper class with conditional mirroring
   const katakanaClass = clsx(styles.katakanaWrapper, {
     [styles.alternateKatakana]: alternate,
   });
 
-  // Katakana SVG
   function renderKatakana(visible) {
     return (
       <svg
@@ -58,72 +62,59 @@ export function ProjectSummary({
     );
   }
 
-  // Image and Katakana with Framer Motion animation
   function renderPreview(visible) {
-    return (
-      <motion.div
-        className={styles.preview}
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{
-          duration: 0.8,
-          ease: [0.25, 0.1, 0.25, 1],
-        }}
-        viewport={{ once: true, amount: 0.3 }}
-      >
-        <motion.div
-          className={styles.imageWrapper}
-          initial={{ scale: 0.95, opacity: 0 }}
-          whileInView={{ scale: 1, opacity: 1 }}
-          transition={{
-            duration: 0.9,
-            ease: [0.25, 0.1, 0.25, 1],
-          }}
-          viewport={{ once: true }}
-        >
-          <motion.img
-            src={imageSrc}
-            alt={`${title} preview`}
-            className={styles.projectImage}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{
-              duration: 0.9,
-              delay: 0.15,
-              ease: [0.25, 0.1, 0.25, 1],
-            }}
-            viewport={{ once: true }}
-          />
+    const content = (
+      <div className={styles.imageWrapper}>
+        <OptimizedImage
+          src={imageSrc}
+          alt={`${title} preview`}
+          className={styles.projectImage}
+        />
+        <div className={katakanaClass}>{renderKatakana(visible)}</div>
+      </div>
+    );
 
+    if (!isClient) {
+      return <div className={styles.preview}>{content}</div>;
+    }
+
+    return (
+      <div className={styles.preview}>
+        <motion.div
+          initial={{ opacity: 0, y: 60 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            duration: 1,
+            ease: [0.25, 0.1, 0.25, 1],
+            delay: 0.2,
+          }}
+        >
           <motion.div
-            className={katakanaClass}
-            initial={{ opacity: 0, scale: 0.9, y: 10 }}
-            whileInView={{ opacity: 0.85, scale: 1, y: 0 }}
+            initial={{ scale: 0.95, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
             transition={{
-              duration: 1,
+              duration: 1.2,
               ease: [0.25, 0.1, 0.25, 1],
-              delay: 0.1,
+              delay: 0.3,
             }}
-            viewport={{ once: true }}
           >
-            {renderKatakana(visible)}
+            {content}
           </motion.div>
         </motion.div>
-      </motion.div>
+      </div>
     );
   }
 
-  // Project details with staggered reveal
   function renderDetails(visible) {
     return (
       <motion.div
         className={styles.details}
-        initial={{ opacity: 0, y: 40 }}
+        initial={{ opacity: 0, y: 80 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{
-          duration: 0.8,
+          duration: 1.2,
           ease: [0.25, 0.1, 0.25, 1],
-          delay: 0.1,
+          delay: 0.4,
         }}
         viewport={{ once: true, amount: 0.2 }}
       >
@@ -139,6 +130,16 @@ export function ProjectSummary({
         <Text className={styles.description} as="p">
           {description}
         </Text>
+
+        {skills.length > 0 && (
+          <div className={styles.skillsList}>
+            {skills.map(skill => (
+              <span key={skill} className={styles.skillTag}>
+                {skill}
+              </span>
+            ))}
+          </div>
+        )}
 
         <div className={styles.projectCardButtons}>
           <Button iconHoverShift href={buttonLink} iconEnd="arrow-right">

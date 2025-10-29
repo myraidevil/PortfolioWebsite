@@ -15,21 +15,13 @@ export const Button = forwardRef(({ href, ...rest }, ref) => {
     return <ButtonContent href={href} ref={ref} {...rest} />;
   }
 
-  return (
-    <ButtonContent
-      unstable_viewTransition
-      as={Link}
-      prefetch="intent"
-      to={href}
-      ref={ref}
-      {...rest}
-    />
-  );
+  return <ButtonContent as={Link} prefetch="intent" to={href} ref={ref} {...rest} />;
 });
 
 const ButtonContent = forwardRef(
   (
     {
+      unstable_viewTransition, // Destructure to omit and prevent passing to DOM
       className,
       as,
       secondary,
@@ -60,11 +52,11 @@ const ButtonContent = forwardRef(
         data-secondary={secondary}
         data-icon={icon}
         href={href}
-        rel={rel || isExternal ? 'noopener noreferrer' : undefined}
-        target={target || isExternal ? '_blank' : undefined}
+        rel={rel || (isExternal ? 'noopener noreferrer' : undefined)}
+        target={target || (isExternal ? '_blank' : undefined)}
         disabled={disabled}
         ref={ref}
-        {...rest}
+        {...rest} // unstable_viewTransition NOT passed here
       >
         {!!icon && (
           <Icon

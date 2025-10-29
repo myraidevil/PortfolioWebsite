@@ -1,18 +1,19 @@
 import { useState } from 'react';
-import { ProjectSummary } from './project-summary'; // Adjust path if needed
-import styles from './myproject-section.module.css'; // You can create styles or add inline styles here
+import { ProjectSummary } from './project-summary';
+import styles from './myproject-section.module.css';
 import { Divider } from '~/components/divider';
 
 export default function MyProjectsSection({ projects }) {
   const [activeTab, setActiveTab] = useState('Development');
 
-  // Filter projects by active tab
-  const filteredProjects = projects.filter(project => project.category === activeTab);
+  const filteredProjects = projects.filter(
+    project => project.category === activeTab
+  );
 
   return (
     <section className={styles.myProjectsSection}>
       <h2>My Projects</h2>
-      <p>curated project list for you to view </p>
+      <p>Curated project list for you to view</p>
 
       <div className={styles.tabs}>
         {['Design', 'Development'].map(tab => {
@@ -24,7 +25,7 @@ export default function MyProjectsSection({ projects }) {
               onClick={() => setActiveTab(tab)}
               type="button"
             >
-              {tab === 'Development' ? ' Development' : ' Design'}
+              {tab}
             </button>
           );
         })}
@@ -34,15 +35,8 @@ export default function MyProjectsSection({ projects }) {
         {filteredProjects.map((project, idx) => (
           <ProjectSummary
             key={project.id}
-            id={project.id}
+            {...project}
             index={idx + 1}
-            title={project.title}
-            description={project.description}
-            buttonText={project.buttonText}
-            buttonLink={project.buttonLink}
-            secondaryButtonText={project.secondaryButtonText}
-            secondaryButtonLink={project.secondaryButtonLink}
-            imageSrc={project.imageSrc}
             visible={true}
           />
         ))}

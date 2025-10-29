@@ -92,9 +92,40 @@ export default function App() {
   }
 
   useEffect(() => {
-    console.info(
-      `Taking a peek huh? Check out the source code: ${config.repo}\n\n`
-    );
+    // Register service worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(error => {
+          console.error('Service worker registration failed:', error);
+        });
+      });
+    }
+
+    // Log repository info
+    console.info(`Taking a peek huh? Check out the source code: ${config.repo}\n\n`);
+
+    // Preload critical images
+    const preloadImages = ['/assets/intro-bg.jpg', '/assets/profile-image.jpg'];
+
+    preloadImages.forEach(imageUrl => {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'image';
+      link.href = imageUrl;
+      document.head.appendChild(link);
+    });
+
+    // Preload critical fonts
+    const preloadFonts = [GothamBook, GothamMedium];
+    preloadFonts.forEach(fontUrl => {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'font';
+      link.href = fontUrl;
+      link.type = 'font/woff2';
+      link.crossOrigin = 'anonymous';
+      document.head.appendChild(link);
+    });
   }, []);
 
   return (

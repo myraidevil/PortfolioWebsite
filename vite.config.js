@@ -15,9 +15,32 @@ export default defineConfig({
   assetsInclude: ['**/*.glb', '**/*.hdr', '**/*.glsl'],
   build: {
     assetsInlineLimit: 1024,
+    cssCodeSplit: true,
+    ssrManifest: true,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            return 'vendor';
+          }
+        },
+      },
+    },
   },
   server: {
     port: 7777,
+    host: true,
+    strictPort: true,
+    hmr: {
+      clientPort: 7777,
+      host: '192.168.1.27',
+      timeout: 120000,
+    },
+    cors: {
+      origin: '*',
+      methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+      allowedHeaders: ['Content-Type', 'Authorization'],
+    },
   },
   plugins: [
     mdx({

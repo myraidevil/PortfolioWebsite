@@ -58,7 +58,7 @@ export const Post = ({ children, title, date, banner, timecode }) => {
             <Transition in timeout={msToNum(tokens.base.durationM)}>
               {({ visible, nodeRef }) => (
                 <div className={styles.date} ref={nodeRef}>
-                  <Divider notchWidth="64px" notchHeight="8px" collapsed={!visible} />
+                  <Divider notchWidth="64px" notchHeight="8px"S />
                   <Text className={styles.dateText} data-visible={visible}>
                     {dateTime}
                   </Text>
