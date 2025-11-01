@@ -12,13 +12,6 @@
   margin-bottom: var(--space3XL);
 }
 
-.skills h2 {
-  font-size: var(--fontSizeHeadingL, 2.5rem);
-  font-weight: var(--fontWeightBold, 700);
-  margin-bottom: var(--spaceS);
-  color: var(--textHeading);
-}
-
 .skills[data-visible='true'] {
   opacity: 1;
 }
@@ -28,7 +21,7 @@
   content: '';
   position: absolute;
   top: 0;
-  width: 50px;
+  width: 60px;
   height: 100%;
   pointer-events: none;
   z-index: 2;
@@ -36,43 +29,44 @@
 
 .skills::before {
   left: 0;
-  background: linear-gradient(to right, var(--background), transparent);
+  background: linear-gradient(to right, var(--background) 80%, transparent);
 }
 
 .skills::after {
   right: 0;
-  background: linear-gradient(to left, var(--background), transparent);
+  background: linear-gradient(to left, var(--background) 80%, transparent);
 }
 
+/* Headings */
 .title {
-  font-size: var(--fontSizeH3);
-  font-weight: var(--fontWeightBold);
+  font-size: clamp(2rem, 3vw, 2.5rem);
+  font-weight: 700;
+  color: var(--textHeading);
   margin-bottom: var(--space2XL);
-  color: var(--textTitle);
+  letter-spacing: 0.5px;
 }
 
+/* Carousel Wrapper */
 .skillsCarousel {
   position: relative;
   z-index: 1;
-  width: 60vw;
-  max-width: 60%;
+  width: 70vw;
+  max-width: 1100px;
   margin: 0 auto;
   overflow: hidden;
-  padding-left: var(--spaceL);
-  padding-right: var(--spaceL);
-  /* Keep fixed and centered */
+  padding-inline: var(--spaceL);
 }
 
 .scrollingWrapper {
   display: flex;
   gap: var(--spaceXL);
   will-change: transform;
-  /* The actual scroll animation is handled by JS */
 }
 
+/* Each Skill Card */
 .skillItem {
   flex-shrink: 0;
-  background: color-mix(in srgb, var(--surface) 96%, transparent);
+  background: color-mix(in oklch, var(--surface) 95%, transparent);
   border-radius: var(--radiusL);
   padding: var(--spaceL);
   min-width: 200px;
@@ -82,42 +76,39 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.35s ease, box-shadow 0.35s ease, background 0.3s ease;
+  border: 1px solid color-mix(in oklch, var(--border) 40%, transparent);
 }
 
 .skillItem:hover {
-  transform: translateY(-6px) scale(1.05);
-  background: color-mix(in srgb, var(--surface) 90%, var(--primary) 6%);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  transform: translateY(-6px);
+  background: color-mix(in oklch, var(--surface) 92%, var(--primary) 4%);
+  box-shadow: 0 6px 16px oklch(0% 0 0 / 0.1);
+  border-color: color-mix(in oklch, var(--primary) 40%, var(--border));
 }
 
+/* Icon */
 .skillIcon {
   font-size: 48px;
-  margin-bottom: var(--spaceS);
   color: var(--textTitle);
-  transition: color 0.25s ease, transform 0.25s ease;
-  animation: none;
-}
-
-/* Glow pulse animation for ACTIVE skill icon only */
-.skillItem.active .skillIcon {
-  animation: glowPulse 6s ease-in-out infinite;
-  color: var(--primary);
-  transform-origin: center;
+  margin-bottom: var(--spaceS);
+  transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .skillItem:hover .skillIcon {
   color: var(--primary);
-  transform: scale(1.1);
+  transform: scale(1.08);
+  filter: drop-shadow(0 0 8px oklch(70% 0.25 290 / 0.4));
 }
 
+/* Name */
 .skillName {
   font-size: var(--fontSizeBodyS);
-  font-weight: var(--fontWeightMedium);
+  font-weight: 500;
   color: var(--textBody);
   letter-spacing: 0.02em;
-  opacity: 0.8;
-  transition: color 0.25s ease;
+  opacity: 0.85;
+  transition: color 0.3s ease, opacity 0.3s ease;
 }
 
 .skillItem:hover .skillName {
@@ -125,53 +116,52 @@
   opacity: 1;
 }
 
+/* Button */
 .viewAll {
   margin-top: var(--space2XL);
 }
 
-@media (max-width: 768px) {
+/* ✨ Subtle Glow Pulse for Active Item */
+.skillItem.glowing .skillIcon {
+  animation: glowPulse 4s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 0 transparent);
+  }
+  50% {
+    filter: drop-shadow(0 0 10px oklch(70% 0.25 290 / 0.5));
+  }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
   .skillsCarousel {
-    width: 100vw;
-    max-width: 100%;
+    width: 90vw;
+    padding-inline: var(--spaceM);
   }
 
   .skillItem {
     min-width: 180px;
+  }
+}
+
+@media (max-width: 768px) {
+  .skillsCarousel {
+    width: 100%;
+  }
+
+  .skillItem {
+    min-width: 160px;
     padding: var(--spaceM);
   }
 
   .skillIcon {
-    font-size: 36px;
+    font-size: 38px;
   }
-}
 
-@keyframes glowPulse {
-  0%, 100% {
-    color: var(--textTitle);
-    transform: scale(1);
-  }
-  50% {
-    color: var(--primary);
-    transform: scale(1.1);
-  }
-}
-
-.skillIcon {
-  font-size: 48px;
-  margin-bottom: var(--spaceS);
-  color: var(--textTitle);
-  transition: color 0.25s ease, transform 0.25s ease;
-  animation: none;
-}
-
-
-@keyframes glowPulse {
-  0%, 100% {
-    color: var(--textTitle);
-    transform: scale(1);
-  }
-  50% {
-    color: var(--primary);
-    transform: scale(1.1);
+  .title {
+    font-size: 1.8rem;
   }
 }

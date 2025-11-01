@@ -142,11 +142,20 @@ export function ProjectSummary({
         )}
 
         <div className={styles.projectCardButtons}>
-          <Button iconHoverShift href={buttonLink} iconEnd="arrow-right">
+          <Button
+            iconHoverShift
+            href={buttonLink}
+            iconEnd="arrow-right"
+            unstable_viewTransition
+          >
             {buttonText}
           </Button>
 
-          <Button href={secondaryButtonLink} data-variant="secondary">
+          <Button
+            href={secondaryButtonLink}
+            data-variant="secondary"
+            unstable_viewTransition
+          >
             <FiEye style={{ marginRight: '8px', fontSize: '1.1em' }} />
             {secondaryButtonText}
           </Button>

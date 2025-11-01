@@ -1,1 +1,0 @@
-export { QtripStatic as default, meta, links } from './qtripstatic';

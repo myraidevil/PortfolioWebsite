@@ -1,0 +1,471 @@
+.qtripstatic {
+    max-width: 80vw;         /* limits width to 80% of the screen */
+  margin: 0 auto;          /* centers horizontally */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--background);
+  color: var(--text);
+  padding: 2rem 4rem; 
+}
+
+/* Header */
+.header {
+  position: fixed;
+  top: 0;
+  z-index: 50;
+  width: 80vw;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 2rem;
+
+  /* Default translucent look */
+  background: color-mix(in oklch, var(--backgroundLight) 85%, transparent);
+  backdrop-filter: blur(12px) saturate(150%);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  border: 1px solid color-mix(in oklch, var(--foreground) 15%, transparent);
+  border-radius: 1rem;
+  transition: background 0.4s ease, border-color 0.4s ease, transform 0.3s ease;
+}
+
+/* Header when scrolled */
+.header .scrolled {
+  background: color-mix(in oklch, var(--backgroundLight) 95%, black 10%);
+  border-color: color-mix(in oklch, var(--foreground) 25%, transparent);
+  transform: scale(1.01);
+}
+
+
+.title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.year {
+  font-size: 1rem;
+  color: var(--textSecondary);
+}
+
+.demoButton {
+  background: var(--primary);
+  color: var(--background);
+  padding: 0.6rem 1.4rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.demoButton:hover {
+  background: var(--accent);
+}
+
+/* CONTENT LAYOUT */
+.content {
+  display: flex;
+  gap: 2rem;
+}
+
+.sidebar {
+  width: 30vw;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  position: sticky;
+  top: 6rem;
+  height: fit-content;
+  padding: 1rem;
+  border-right: 1px solid var(--border);
+}
+
+.sidebarButton {
+  background: transparent;
+  border: none;
+  text-align: left;
+  font-size: 0.95rem;
+  color: var(--textSecondary);
+  padding: 0.6rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.sidebarButton:hover {
+  background: oklch(35% 0.05 280 / 0.1);
+  color: var(--text);
+}
+
+.sidebarButtonActive {
+  background: var(--primary);
+  color: var(--background);
+  font-weight: 600;
+}
+
+
+
+.sidebarLink {
+  color: var(--textSecondary);
+  text-decoration: none;
+  font-size: 0.95rem;
+  padding: 0.5rem 0.75rem;
+  border-left: 3px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.sidebarLink:hover {
+  color: var(--text);
+  border-left-color: var(--primary);
+  background: oklch(35% 0.05 280 / 0.1);
+}
+
+/* MAIN CONTENT */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+/* SECTION STYLES */
+.section {
+  border-radius: 0.75rem;
+  padding: 3rem 3.5rem;   /* more inner space */
+  margin-bottom: 3rem;    /* more gap between sections */
+  box-shadow: 0 2px 12px oklch(0% 0 0 / 0.1);
+  background: var(--backgroundLight);
+}
+
+.lightSection {
+  background: var(--backgroundLight);
+}
+
+.darkSection {
+  background: var(--background);
+}
+
+.section h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 1.2rem;
+  border-left: 4px solid var(--accent);
+  padding-left: 0.75rem;
+}
+
+.section p {
+  color: var(--textSecondary);
+  margin-bottom: 1rem;
+  max-width: 800px;
+}
+
+.section ul {
+  margin: 1rem 0 1.5rem 1.5rem;
+  list-style: disc;
+  color: var(--textSecondary);
+}
+
+.section li {
+  margin-bottom: 0.6rem;
+}
+
+
+.imageGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.imageCard {
+    text-align: center;
+  background: var(--backgroundLight);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  padding: 4px;
+  box-shadow: 0 2px 8px oklch(0% 0 0 / 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+}
+
+img {
+   width: 100%;
+  height: auto; /* ✅ maintain aspect ratio */
+  object-fit: cover;
+  border-radius: 0.5rem;
+  transition: transform 0.3s ease;
+  display: block;
+}
+
+.imageCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 16px oklch(0% 0 0 / 0.15);
+}
+
+.imageLabel {
+ margin-top: 0.6rem;
+  font-size: 0.9rem;
+  color: var(--textSecondary);
+  text-align: center;
+  padding: 0 0.5rem 0.8rem;
+  line-height: 1.4;
+}
+
+.skillTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 1rem 0 1.5rem;
+}
+
+.tag {
+  background: var(--background);
+  color: var(--text);
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border: 1px solid var(--border);
+  transition: all 0.2s ease;
+}
+
+.tag:hover {
+  background: var(--primary);
+  color: var(--background);
+  border-color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.fullscreenOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  cursor: zoom-out;
+  animation: fadeIn 0.3s ease;
+}
+
+.fullscreenImage {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 1rem;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .content {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 1rem;
+    padding-bottom: 1rem;
+  }
+  .sidebarLink {
+    border-left: none;
+    border-bottom: 2px solid transparent;
+  }
+  .sidebarLink:hover {
+    border-bottom-color: var(--primary);
+  }
+}
+
+.fullscreenOverlay img,
+.fullscreenImage {
+  width: auto !important;
+  height: 100vh !important; /* ✅ fills the full screen height */
+  max-width: 100vw !important;
+  object-fit: contain !important;
+  border-radius: 0 !important;
+  display: block;
+}
+
+/* 📱 TABLET & SMALL LAPTOP (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .qtripstatic {
+    max-width: 90vw;
+    padding: 1.5rem 2rem;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .content {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .sidebar {
+    display: none; /* hide sidebar on tablet */
+  }
+
+  .main {
+    width: 100%;
+    padding: 0;
+  }
+
+  .section {
+    padding: 2rem;
+  }
+
+  .section h2 {
+    font-size: 1.5rem;
+  }
+
+  .imageGrid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+  .imageCard {
+    max-width: 100%;
+  }
+}
+
+/* 📱 MOBILE SCREENS (max-width: 768px) */
+@media (max-width: 768px) {
+  .qtripstatic {
+    max-width: 95vw;
+    padding: 1rem 1.2rem;
+  }
+
+  .header {
+    padding: 0.8rem 1rem;
+    gap: 0.6rem;
+  }
+
+  .title {
+    font-size: 1.6rem;
+  }
+
+  .demoButton {
+    width: 100%;
+    text-align: center;
+    padding: 0.7rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .sidebar {
+    display: none; /* hide sidebar entirely */
+  }
+
+  .main {
+    gap: 2rem;
+  }
+
+  .section {
+    padding: 1.5rem;
+    box-shadow: none;
+  }
+
+  .section h2 {
+    font-size: 1.4rem;
+    border-left-width: 3px;
+  }
+
+  .section p,
+  .section li {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .skillTags {
+    gap: 0.4rem;
+  }
+
+  .tag {
+    font-size: 0.8rem;
+    padding: 0.35rem 0.75rem;
+  }
+
+  .imageGrid {
+    grid-template-columns: 1fr; /* stack images vertically */
+    gap: 1.2rem;
+  }
+
+  .imageCard {
+    max-width: 100%;
+    padding: 0.4rem;
+  }
+
+  img {
+    border-radius: 0.4rem;
+  }
+
+  .imageLabel {
+    font-size: 0.85rem;
+  }
+
+  .fullscreenImage {
+    max-width: 100vw;
+    max-height: 80vh;
+  }
+}
+
+/* 📱 EXTRA SMALL SCREENS (max-width: 480px) */
+@media (max-width: 480px) {
+  .qtripstatic {
+    padding: 0.8rem;
+  }
+
+  .title {
+    font-size: 1.4rem;
+  }
+
+  .section {
+    padding: 1rem;
+  }
+
+  .section h2 {
+    font-size: 1.2rem;
+  }
+
+  .section p,
+  .section li {
+    font-size: 0.9rem;
+  }
+
+  .imageLabel {
+    font-size: 0.8rem;
+  }
+
+  .demoButton {
+    font-size: 0.85rem;
+    padding: 0.6rem;
+  }
+
+  .fullscreenImage {
+    height: auto !important;
+    max-height: 85vh !important;
+  }
+}

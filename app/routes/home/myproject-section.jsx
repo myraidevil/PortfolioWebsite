@@ -4,11 +4,9 @@ import styles from './myproject-section.module.css';
 import { Divider } from '~/components/divider';
 
 export default function MyProjectsSection({ projects }) {
-  const [activeTab, setActiveTab] = useState('Development');
+  const [activeTab, setActiveTab] = useState('Design');
 
-  const filteredProjects = projects.filter(
-    project => project.category === activeTab
-  );
+  const filteredProjects = projects.filter(project => project.category === activeTab);
 
   return (
     <section className={styles.myProjectsSection}>
@@ -33,12 +31,7 @@ export default function MyProjectsSection({ projects }) {
 
       <div className={styles.projectsGrid}>
         {filteredProjects.map((project, idx) => (
-          <ProjectSummary
-            key={project.id}
-            {...project}
-            index={idx + 1}
-            visible={true}
-          />
+          <ProjectSummary key={project.id} {...project} index={idx + 1} visible={true} />
         ))}
         {filteredProjects.length === 0 && <p>No projects found.</p>}
       </div>

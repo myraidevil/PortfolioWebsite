@@ -2,7 +2,7 @@
 .myProjectsSection {
   width: 100%;
   max-width: 2400px;
-  margin: 0 auto var(--space5XL, 96px);
+  margin: 0 auto var(--space2XL, 96px);
   padding-inline: var(--spaceXL);
   text-align: center;
   display: flex;
@@ -120,7 +120,7 @@
 /* Responsive adjustments */
 @media (max-width: 900px) {
   .myProjectsSection {
-    padding-inline: var(--spaceM);
+    padding-inline: var(--spaceS);
   }
 
   .tabs {
@@ -133,6 +133,6 @@
   }
 
   .projectsGrid {
-    gap: var(--space2XL);
+    gap: var(--spaceXL);
   }
 }
